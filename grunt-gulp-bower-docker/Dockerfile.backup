@@ -1,0 +1,56 @@
+FROM node:latest
+
+RUN mkdir -p /usr/src/app/logs
+WORKDIR /usr/src/app
+
+ENV PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
+
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm install -g grunt-cli gulp phantomjs bower
+
+RUN apt-get update
+RUN apt-get install -y ruby-full
+RUN gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+RUN gem install sass compass
+
+COPY keys /usr/src/app
+
+RUN mkdir -p /root/.ssh
+COPY ssh/* /root/.ssh/
+
+ENV DOMAIN="http://www.axinjinfu.com"
+ENV SESSION_SECRET="hpt-secret"
+
+ENV GOOGLE_ID="app-id"
+ENV GOOGLE_SECRET="secret"
+
+ENV WECHAT_ID="wx54a1c5a0ff1f90f6"
+ENV WECHAT_SECRET="766fd605af0b8b828a3b6264cf3caff8"
+
+ENV YUNTONGXUN_ACCOUNT_SID="8a48b5514b0b8727014b249e6cca138c"
+ENV YUNTONGXUN_AUTH_TOKEN="a4d9fdc535e44436b92523afb09b1873"
+ENV YUNTONGXUN_APP_ID="8a48b5514b0b8727014b249ed675138e"
+ENV YUNTONGXUN_APP_TOKEN="d8b096a50dae11e5ac73ac853d9f54f2"
+
+ENV QIANHAI_DESKEY="SK803@!QLF-D25WEDA5E52DA"
+ENV QIANHAI_USERNAME="V_PA025_QHCS_DCS"
+ENV QIANHAI_USERPWD="weblogic1"
+
+ENV QIANHAI_USERNAME="V_PA025_QHCS_DCS"
+ENV QIANHAI_USERPWD="weblogic1"
+ENV QIANHAI_SIGNPEM="/usr/src/app/keys/qianhai/credoo_stg1.pem"
+
+ENV MIGUAN_USERNAME="366jinrong"
+ENV MIGUAN_APPKEY="db2af6b9e5c6464c92dcb89635c8f372"
+
+ENV TONGDUN_PARTNER_CODE="queqianme"
+ENV TONGDUN_PARTNER_KEY="6b9160542729445a9ceb53f48805b78c"
+ENV TONGDUN_APPNAME="queqianme_web"
+
+ENV #zmxy config env
+ENV ZMXY_SERVER_PUBLIC_KEY="/usr/src/app/keys/zmxy/server_public_key.pem"
+ENV ZMXY_CLIENT_PRIVATE_KEY="/usr/src/app/keys/zmxy/client_private_key.pem"
+
+ENV LOGGER_FILE="/usr/src/app/logs/requests.log"
+
+ENV DEBUG=""

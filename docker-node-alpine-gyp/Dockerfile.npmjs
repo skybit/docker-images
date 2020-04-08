@@ -1,0 +1,2 @@
+FROM node-alpine-gyp:latest
+RUN npm config set registry https://registry.npmjs.org/

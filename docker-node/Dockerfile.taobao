@@ -1,0 +1,2 @@
+FROM registry.docker.dfxkdata.com/node-alpine:latest
+RUN npm config set registry https://registry.taobao.org/

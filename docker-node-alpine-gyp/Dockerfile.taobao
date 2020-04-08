@@ -1,0 +1,3 @@
+FROM node-alpine-gyp:latest
+RUN npm config set registry https://registry.taobao.org/ \
+    && npm config set puppeteer_download_host=https://npm.taobao.org/mirrors
