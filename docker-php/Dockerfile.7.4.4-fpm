@@ -1,0 +1,26 @@
+FROM php:7.4.4-fpm
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y \
+    pkg-config \
+    zlib1g-dev \
+    libzip-dev \
+    libcurl4 \
+    libcurl4-openssl-dev \
+    openssl \
+    libpng-dev \
+    libc-client2007e-dev \
+    libkrb5-dev \
+    libonig-dev
+RUN docker-php-ext-install \
+     pdo \
+     pdo_mysql \
+     mysqli \
+     bcmath \
+     curl \
+     gd \
+     fileinfo
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
+     docker-php-ext-install \
+     imap \
+     mbstring \
+     zip
